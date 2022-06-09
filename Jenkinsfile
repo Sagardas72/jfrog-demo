@@ -43,5 +43,10 @@ pipeline {
                 )
             }
         }
+        stage ('Build latest Docker Image') {
+            steps {
+                sh "docker build -t jfrog-demo/spring-boot-docker ."
+            }
+        }
     }
 }
