@@ -3,13 +3,16 @@ pipeline {
     tools { 
         maven 'maven3.6' 
     }
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-jfrog-demo')
+    }
     stages {	
         stage ('Artifactory configuration') {
             steps {
                 rtServer (
                     id: "ARTIFACTORY_SERVER",
                     url: "http://artifactory:8082/artifactory",
-					credentialsId: 'b7a1a8e8-1341-4366-989c-7e5f29a8fc82'
+		    credentialsId: 'b7a1a8e8-1341-4366-989c-7e5f29a8fc82'
                 )
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
@@ -45,8 +48,19 @@ pipeline {
         }
         stage ('Build latest Docker Image') {
             steps {
-                sh "docker build -t jfrog-demo/spring-boot-docker:$BUILD_NUMBER ."
+                sh "docker build -t $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER ."
             }
+        }
+        stage ('Push Dockerfile to Dockerhub') {
+            steps {
+                sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+                sh "docker push $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER"
+            }
+        }
+    }
+    post {
+        always {
+            sh "docker logout"
         }
     }
 }
