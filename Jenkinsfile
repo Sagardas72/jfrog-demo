@@ -1,9 +1,7 @@
 pipeline {
     agent any
     tools { 
-	// Global tools to be used by the pipeline
         maven 'maven3.6' 
-        jdk 'jdk8' 
     }
     stages {	
         stage ('Artifactory configuration') {
