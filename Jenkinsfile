@@ -9,20 +9,20 @@ pipeline {
     stages {	
         stage ('Artifactory configuration') {
             steps {
-                rtServer (
-                    id: "ARTIFACTORY_SERVER",
-                    url: "http://artifactory:8082/artifactory",
-		    credentialsId: 'b7a1a8e8-1341-4366-989c-7e5f29a8fc82'
-                )
+//                rtServer (
+//                   id: "ARTIFACTORY_SERVER",
+//                   url: "http://artifactory:8082/artifactory",
+//		     credentialsId: 'b7a1a8e8-1341-4366-989c-7e5f29a8fc82'
+//                )
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
-                    serverId: "ARTIFACTORY_SERVER",
+                    serverId: "jfrog-artifactory",
                     releaseRepo: "test-libs-release-local",
                     snapshotRepo: "test-libs-snapshot-local"
                 )
                 rtMavenResolver (
                     id: "MAVEN_RESOLVER",
-                    serverId: "ARTIFACTORY_SERVER",
+                    serverId: "jfrog-artifactory",
                     releaseRepo: "test-libs-release",
                     snapshotRepo: "test-libs-snapshot"
                 )
@@ -42,7 +42,7 @@ pipeline {
         stage ('Publish build info') {
             steps {
                 rtPublishBuildInfo (
-                    serverId: "ARTIFACTORY_SERVER"
+                    serverId: "jfrog-artifactory"
                 )
             }
         }
@@ -55,6 +55,7 @@ pipeline {
             steps {
                 sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
                 sh "docker push $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER"
+                sh "docker push $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:latest"
             }
         }
     }
