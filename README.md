@@ -11,17 +11,18 @@ Please refer [these set of docs](./resources/docs/getting-started.md) to setup a
 
 ## Run the project
 
-#### Prerequisites
+### Prerequisites
 - An existing github account to clone the existing repository into.
 - A running Jenkins Instance with [Credentials](https://github.com/jenkinsci/credentials-plugin/blob/master/docs/user.adoc), [Pipeline](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/), and [Artifactory](https://www.jenkins.io/doc/pipeline/steps/artifactory/#artifactory-plugin) plugins installed at minimum.
 - A running Artifactory Server with a maven repository setup for storing artifacts
 - A repository created on dockerhub to store the image
 > **NOTE**: Follow the readmes under resources/docs if you need help with any of the prerequisites mentioned above.
+  
   **NOTE**: The **dockerhub** piece of the architecture can be replaced by your preferred choice of image repository to store the image. This will need a small change in the **Jenkinsfile** in the way the built image is being tagged. 
   
-#### Steps
+### Steps
 
-##### I - Clone the current repository into your own git repo
+#### I - Clone the current repository into your own git repo
 1. Create a repo in your github account
 2. Clone the repo 
    ```git clone https://github.com/Sagardas72/jfrog-demo.git```
@@ -32,9 +33,9 @@ Please refer [these set of docs](./resources/docs/getting-started.md) to setup a
    git push --mirror <your git repo url>
    ```
    
-##### II - Setup Jenkins Server
+#### II - Setup Jenkins Server
 
-####### Create credentials
+###### Create credentials
 1. Login to Jenkins Server and select **Manage Jenkins -> Manage Credentials**
 2. Click on **Jenkins** and on the next page click on **Global Credentials**
 3. On the left tab, click on **Add Credentials**
@@ -42,13 +43,13 @@ Please refer [these set of docs](./resources/docs/getting-started.md) to setup a
    > NOTE: For the password, use a personal access token (PAT), instead of your password, as github has moved away from using your account password. Follow the steps in [this link](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to setup the personal access token for your github account.
 5. Perform the same set of steps for your Artifactory Server and the Dockerhub account.
 
-####### Setup Maven for Jenkins Server
+###### Setup Maven for Jenkins Server
 1. Login to Jenkins Server and select **Manage Jenkins -> Global Tool Configuration**
 2. Under the **Maven** tab, select **Maven Installtions**
 3. Give a useful name for the maven installation, select the **Install automatically** check box, and select the version of maven to be installed.
 4. Click **Save** at the bottom of the screen.
 
-####### Setup Artifactory
+###### Setup Artifactory
 1. Login to the Jenkins Server and select **Manage Jenkins -> Configure System**
 2. Scroll down to the **JFrog** section
 3. Select the **Use the Credentials Plugin** checkbox
@@ -56,7 +57,7 @@ Please refer [these set of docs](./resources/docs/getting-started.md) to setup a
 5. Finally, under **Credentials**, select the stored credentials for the artifactory server created above.
 6. Click on **Save** at the bottom of the screen.
 
-####### Create Pipeline in Jenkins
+###### Create Pipeline in Jenkins
 1. Login to Jenkins Server and select **New Item** under the left tab
 2. Enter a name for the job and select **Pipeline** as the job type.
 3. On the **Pipeline configuration** page scroll down to the **Pipeline** section
