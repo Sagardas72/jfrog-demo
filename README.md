@@ -1,9 +1,8 @@
-#JFROG DEMO
-
+# JFROG DEMO
 This git repository contains the deliverables for the JFROG Technical Demo Presentation
-##SUMMARY
+## SUMMARY
 This git repository contains the source code for the [**Spring PetClinic Application**](https://github.com/spring-projects/spring-petclinic) along with the necessary **pom.xml** file required for building the application. The repository also contains a Jenkinsfile and a Dockerfile used to build and publish the application as a runnable docker image.
-##DEMO ARCHITECTURE SETUP
+## DEMO ARCHITECTURE SETUP
 ![Preview1](./resources/images/Jfrog-demo-arch.png)
 The above diagram represents the environment used to create the demo deliverables. The source code was obtained from the provided [github repository](https://github.com/spring-projects/spring-petclinic). The Jenkins server and the Artifactory server were run locally on the workstation as docker containers. Finally a public repo was created on dockerhub to host the runnable application docker image that will be created as a part of the Jenkins pipeline run.
 Please refer [these set of docs](./resources/docs/getting-started.md) to setup a similar environment locally on your workstation.
