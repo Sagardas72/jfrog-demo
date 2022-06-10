@@ -1,10 +1,10 @@
 ## Getting started
 This document will help you setup your own demo environment on your local workstation
 
-### Set up Artifactory & Jenkins Servers with Docker
+### Set up Artifactory & Jenkins Server with Docker
 
 #### Prerequisites
-1. Have docker installed locally on your workstation. Follow [this link](https://docs.docker.com/get-docker/) to help install docker locally if not already done. 
+1. Have docker installed locally on your workstation. Follow [this link](https://docs.docker.com/get-docker/) to install docker locally if not already done. 
 2. Have a trial license for JFrog available. It can be gotten from https://jfrog.com/start-free/
 
 #### Setup Jenkins in Docker
@@ -66,7 +66,7 @@ This document will help you setup your own demo environment on your local workst
 8. Exit out of the jenkins-blueocean container.
    ```exit```
 	
-#### Setup Artifactory Server in DOcker
+#### Setup Artifactory Server in Docker
 1. Create a docker volume
    ```docker volume create artifactory-data```
 2. Run the artifactory container
@@ -83,7 +83,7 @@ This document will help you setup your own demo environment on your local workst
 3. Browse to http://localhost:8081/artifactory on the workstation browser to access the Artifactory UI. 
    > **NOTE**: The initial setup will require the entry of the jfrog license.
    
-   > **NOTE**: Make sure to attach the artifactory container to the same network that Jenkins server is running on to facilitate communication between Jenkins server and Artifactory.
+   > **NOTE**: Make sure to attach the artifactory container to the same network that Jenkins server is attached to to facilitate communication between Jenkins server and Artifactory.
 4. Set a new password for the admin user. Default is admin/password.
 5. When the UI asks to **Create Repositories**, select the **Quick Setup** option and then select **Maven** as the repository type.
 6. Add a meaningful name as the repository prefix. This will add the same prefix to all the five repositories that will be created for the maven repository. These names (with the prefix) will be used to upload the artifacts from Jenkins to Artifactory. 

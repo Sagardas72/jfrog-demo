@@ -7,7 +7,8 @@ This git repository contains the source code for the [**Spring PetClinic Applica
 ## DEMO ARCHITECTURE SETUP
 ![Preview1](./resources/images/Jfrog-demo-arch.png)
 The above diagram represents the environment used to create the demo deliverables. The source code was obtained from the provided [github repository](https://github.com/spring-projects/spring-petclinic) for the **Spring PetClinic Application**. The Jenkins server and the Artifactory server were run locally on the workstation as docker containers. Finally a public repo was created on dockerhub to host the runnable application docker image that will be created as a part of the Jenkins pipeline run.
-Please refer [these set of docs](./resources/docs/getting-started.md) to setup a similar environment locally on your workstation.
+
+Please refer the [*getting-started*](./resources/docs/getting-started.md) doc to setup a similar environment locally on your workstation.
 
 ## Run the project
 
@@ -33,7 +34,7 @@ Please refer [these set of docs](./resources/docs/getting-started.md) to setup a
    git push --mirror <your git repo url>
    ```
    
-#### II - Setup Jenkins Server
+#### II - Setup Jenkins Server & Run the Pipeline
 
 ###### Create credentials
 1. Login to Jenkins Server and select **Manage Jenkins -> Manage Credentials**
@@ -69,3 +70,20 @@ Please refer [these set of docs](./resources/docs/getting-started.md) to setup a
    - Under **Script Path**, enter the path to the Jenkinsfile relative to the root of the project. (In this case, it will simply be Jenkinsfile, as the file is present at the root of the project)
 4. Click **Save**
 5. On the next page, click on **Build Now** option from the left tab and let the pipeline finish.
+
+#### III - Run the application using the Docker Image
+1. Login to dockerhub from the cli
+   ```docker login -u <username> -p <password>```
+2. Pull the latest jfrog-demo image
+   ```docker pull arceus805/jfrog-demo:latest```
+3. Run the docker image
+   ```
+   docker run \
+   -d \
+   --rm \
+   -p 8080:8080 \
+   arceus805/jfrog-demo:latest
+   ```
+4. Browse to http://localhost:8080 on the workstation browser to access the Spring PetClinic Application.
+   > **NOTE**: Incase some other container is using port 8080 (for example, the Jenkins container is exposed over port 8080 in our demo environment), expose the container's port 8080 over some other host port that is not being currently utilized. 
+   ```docker run -d --rm -p 8050:8080 arceus805/jfrog-demo:latest```
