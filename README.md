@@ -1,4 +1,5 @@
 #JFROG DEMO
+
 This git repository contains the deliverables for the JFROG Technical Demo Presentation
 ##SUMMARY
 This git repository contains the source code for the [**Spring PetClinic Application**](https://github.com/spring-projects/spring-petclinic) along with the necessary **pom.xml** file required for building the application. The repository also contains a Jenkinsfile and a Dockerfile used to build and publish the application as a runnable docker image.
