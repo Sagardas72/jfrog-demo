@@ -49,6 +49,7 @@ pipeline {
         stage ('Build latest Docker Image') {
             steps {
                 sh "docker build -t $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER ."
+                sh "docker tag $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:latest"
             }
         }
         stage ('Push Dockerfile to Dockerhub') {
