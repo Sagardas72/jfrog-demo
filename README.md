@@ -16,9 +16,9 @@ Please refer [these set of docs](./resources/docs/getting-started.md) to setup a
 - A running Jenkins Instance with [Credentials](https://github.com/jenkinsci/credentials-plugin/blob/master/docs/user.adoc), [Pipeline](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/), and [Artifactory](https://www.jenkins.io/doc/pipeline/steps/artifactory/#artifactory-plugin) plugins installed at minimum.
 - A running Artifactory Server with a maven repository setup for storing artifacts
 - A repository created on dockerhub to store the image
-> **NOTE**: Follow the readmes under resources/docs if you need help with any of the prerequisites mentioned above.
+> **NOTE**: Follow the readmes under **resources/docs** if you need help with any of the prerequisites mentioned above.
   
-  **NOTE**: The **dockerhub** piece of the architecture can be replaced by your preferred choice of image repository to store the image. This will need a small change in the **Jenkinsfile** in the way the built image is being tagged. 
+>  **NOTE**: The **dockerhub** piece of the architecture can be replaced by your preferred choice of image repository to store the image. This will need a small change in the **Jenkinsfile** in the way the built image is being tagged. 
   
 ### Steps
 
@@ -40,7 +40,7 @@ Please refer [these set of docs](./resources/docs/getting-started.md) to setup a
 2. Click on **Jenkins** and on the next page click on **Global Credentials**
 3. On the left tab, click on **Add Credentials**
 4. On the next page, select **Username with password** as the kind, keeping the scope Global, and add the username/password for your github account. Under **ID** add a meaningful name for the credentials (for example, sagardas72-github-credentials). 
-   > NOTE: For the password, use a personal access token (PAT), instead of your password, as github has moved away from using your account password. Follow the steps in [this link](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to setup the personal access token for your github account.
+   > **NOTE**: For the password, use a personal access token (PAT), instead of your password, as github has moved away from using your account password. Follow the steps in [this link](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to setup the personal access token for your github account.
 5. Perform the same set of steps for your Artifactory Server and the Dockerhub account.
 
 ###### Setup Maven for Jenkins Server
