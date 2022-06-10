@@ -1,19 +1,19 @@
 # JFROG DEMO
 This git repository contains the deliverables for the JFROG Technical Demo Presentation
 ## SUMMARY
-This git repository contains the source code for the [**Spring PetClinic Application**](https://github.com/spring-projects/spring-petclinic) along with the necessary **pom.xml** file required for building the application. The repository also contains a Jenkinsfile and a Dockerfile used to build and publish the application as a runnable docker image.
+This git repository contains the source code for the [**Spring PetClinic Application**](https://github.com/spring-projects/spring-petclinic) along with the necessary **pom.xml** file required for building the application. The repository also contains a **Jenkinsfile** and a **Dockerfile** used to build and publish the application as a runnable docker image.
 ## DEMO ARCHITECTURE SETUP
 ![Preview1](./resources/images/Jfrog-demo-arch.png)
-The above diagram represents the environment used to create the demo deliverables. The source code was obtained from the provided [github repository](https://github.com/spring-projects/spring-petclinic). The Jenkins server and the Artifactory server were run locally on the workstation as docker containers. Finally a public repo was created on dockerhub to host the runnable application docker image that will be created as a part of the Jenkins pipeline run.
+The above diagram represents the environment used to create the demo deliverables. The source code was obtained from the provided [github repository](https://github.com/spring-projects/spring-petclinic) for the **Spring PetClinic Application**. The Jenkins server and the Artifactory server were run locally on the workstation as docker containers. Finally a public repo was created on dockerhub to host the runnable application docker image that will be created as a part of the Jenkins pipeline run.
 Please refer [these set of docs](./resources/docs/getting-started.md) to setup a similar environment locally on your workstation.
 ## Run the project
 #### Prerequisites
 - An existing github account to clone the existing repository into.
-- A running Jenkins Instance with Credentials, Pipeline, and Artifactory plugins installed at minimum.
+- A running Jenkins Instance with [Credentials](https://github.com/jenkinsci/credentials-plugin/blob/master/docs/user.adoc), [Pipeline](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/), and [Artifactory](https://www.jenkins.io/doc/pipeline/steps/artifactory/#artifactory-plugin) plugins installed at minimum.
 - A running Artifactory Server with a maven repository setup for storing artifacts
 - A repository created on dockerhub to store the image
-> NOTE: Follow the readmes under resources/docs if you need help with any of the prerequisites mentioned aboove.
-> NOTE: The dockerhub can be replaced by your preferred choice of image repository to store the image. This will need a small change in the Jenkinsfile in the way the built image is being tagged.
+> **NOTE**: Follow the readmes under resources/docs if you need help with any of the prerequisites mentioned aboove.
+  **NOTE**: The **dockerhub** piece of the architecture can be replaced by your preferred choice of image repository to store the image. This will need a small change in the **Jenkinsfile** in the way the built image is being tagged. 
 #### Steps
 ##### I - Clone the current repository into your own git repo
 1. Create a repo in your github account
@@ -22,7 +22,7 @@ Please refer [these set of docs](./resources/docs/getting-started.md) to setup a
 3. Push the cloned repo to your git repo 
    - ```
      git add .
-	 git commit -m "FIrst commit"
+	 git commit -m "First commit"
 	 git push --mirror <your git repo url>
 	 ```
 ##### II - Setup Jenkins Server
@@ -31,7 +31,7 @@ Please refer [these set of docs](./resources/docs/getting-started.md) to setup a
 2. Click on **Jenkins** and on the next page click on **Global Credentials**
 3. On the left tab, click on **Add Credentials**
 4. On the next page, select **Username with password** as the kind, keeping the scope Global, and add the username/password for your github account. Under **ID** add a meaningful name for the credentials (for example, sagardas72-github-credentials). 
-   - > NOTE: For the password, use a personal access token (PAT), instead of your password, as github has moved away from using your account password. Follow the steps in [this link](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to setup the personal access token for your github account.
+   > NOTE: For the password, use a personal access token (PAT), instead of your password, as github has moved away from using your account password. Follow the steps in [this link](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to setup the personal access token for your github account.
 5. Perform the same set of steps for your Artifactory Server and the Dockerhub account.
 ####### Setup Maven for Jenkins Server
 1. Login to Jenkins Server and select **Manage Jenkins -> Global Tool Configuration**
