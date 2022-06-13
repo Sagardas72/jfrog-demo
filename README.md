@@ -8,7 +8,7 @@ This git repository contains the source code for the [**Spring PetClinic Applica
 ![Preview1](./resources/images/Jfrog-demo-arch.png)
 The above diagram represents the environment used to create the demo deliverables. The source code was obtained from the provided [github repository](https://github.com/spring-projects/spring-petclinic) for the **Spring PetClinic Application**. The Jenkins server and the Artifactory server were run locally on the workstation as docker containers. Finally a public repo was created on dockerhub to host the runnable application docker image that will be created as a part of the Jenkins pipeline run.
 
-Please refer the [*getting-started*](./resources/docs/getting-started.md) doc to setup a similar environment locally on your workstation.
+\*\*Please refer the [*getting-started*](./resources/docs/getting-started.md) doc to setup a similar environment locally on your workstation.\*\*
 
 ## Run the project
 
