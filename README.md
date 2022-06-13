@@ -17,7 +17,7 @@ The above diagram represents the environment used to create the demo deliverable
 - A running Jenkins Instance with [Credentials](https://github.com/jenkinsci/credentials-plugin/blob/master/docs/user.adoc), [Pipeline](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/), and [Artifactory](https://www.jenkins.io/doc/pipeline/steps/artifactory/#artifactory-plugin) plugins installed at minimum.
 - A running Artifactory Server with a maven repository setup for storing artifacts
 - A repository created on dockerhub to store the image
-> **NOTE**: Follow the readmes under **resources/docs** if you need help with any of the prerequisites mentioned above.
+> **NOTE**: Follow the readme under **resources/docs** if you need help with any of the prerequisites mentioned above.
   
 >  **NOTE**: The **dockerhub** piece of the architecture can be replaced by your preferred choice of image repository to store the image. This will need a small change in the **Jenkinsfile** in the way the built image is being tagged. 
   
