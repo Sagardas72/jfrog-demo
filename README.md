@@ -25,7 +25,7 @@ The above diagram represents the environment used to create the demo deliverable
 
 #### I - Clone the current repository into your own git repo
 1. Create a repo in your github account
-2. Clone the repo 
+2. Clone the repo<br />
    ```git clone https://github.com/Sagardas72/jfrog-demo.git```
 3. Push the cloned repo to your git repo 
    ```
@@ -72,9 +72,9 @@ The above diagram represents the environment used to create the demo deliverable
 5. On the next page, click on **Build Now** option from the left tab and let the pipeline finish.
 
 #### III - Run the application using the Docker Image
-1. Login to dockerhub from the cli
+1. Login to dockerhub from the cli<br />
    ```docker login -u <username> -p <password>```
-2. Pull the latest jfrog-demo image
+2. Pull the latest jfrog-demo image<br />
    ```docker pull arceus805/jfrog-demo:latest```
 3. Run the docker image
    ```
@@ -85,5 +85,5 @@ The above diagram represents the environment used to create the demo deliverable
    arceus805/jfrog-demo:latest
    ```
 4. Browse to http://localhost:8080 on the workstation browser to access the Spring PetClinic Application.
-   > **NOTE**: Incase some other container is using port 8080 (for example, the Jenkins container is exposed over port 8080 in our demo environment), expose the container's port 8080 over some other host port that is not being currently utilized. 
+   > **NOTE**: Incase some other container is using port 8080 (for example, the Jenkins container is exposed over port 8080 in our demo environment), expose the container's port 8080 over some other host port that is not being currently utilized.<br />
    ```docker run -d --rm -p 8050:8080 arceus805/jfrog-demo:latest```
