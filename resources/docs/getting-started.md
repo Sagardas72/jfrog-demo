@@ -17,7 +17,7 @@ This document will help you setup your own demo environment on your local workst
    --rm \
    --detach \
    --privileged \
-   --network jenkins \
+   --network jfrog \
    --network-alias docker \
    --env DOCKER_TLS_CERTDIR=/certs \
    --volume jenkins-docker-certs:/certs/client \
