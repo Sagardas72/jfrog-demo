@@ -24,7 +24,8 @@ This document will help you setup your own demo environment on your local workst
    --volume jenkins-data:/var/jenkins_home \
    --publish 2376:2376 \
    --storage-driver overlay2 \
-   docker:dind
+   docker:dind \
+   --insecure-registry artifactory:8082
    ```
 3. Customize the official Docker image.
    - Create a Dockerfile with the following content:
@@ -85,8 +86,8 @@ This document will help you setup your own demo environment on your local workst
    
    > **NOTE**: Make sure to attach the artifactory container to the same network that Jenkins server is attached to to facilitate communication between Jenkins server and Artifactory.
 4. Set a new password for the admin user. Default is admin/password.
-5. When the UI asks to **Create Repositories**, select the **Quick Setup** option and then select **Maven** as the repository type.
-6. Add a meaningful name as the repository prefix. This will add the same prefix to all the five repositories that will be created for the maven repository. These names (with the prefix) will be used to upload the artifacts from Jenkins to Artifactory. 
+5. When the UI asks to **Create Repositories**, select the **Quick Setup** option and then select **Maven** and **Docker** as the repository types.
+6. Add a meaningful name as the repository prefix. This will add the same prefix to all the five repositories that will be created for the maven repository, and all the three repositories that will be created for the docker repository. These names (with the prefix) will be used to upload the artifacts from Jenkins to Artifactory. 
 
 #### Configure Jenkins Server
 1. Login to Jenkins.

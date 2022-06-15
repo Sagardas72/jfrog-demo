@@ -71,7 +71,7 @@ The above diagram represents the environment used to create the demo deliverable
 4. Click **Save**.
 5. On the next page, click on **Build Now** option from the left tab and let the pipeline finish.
 
-#### III - Run the application using the Docker Image
+#### IIIA - Run the application using the Docker Image from DockerHub
 1. Login to dockerhub from the cli.<br />
    ```docker login -u <username> -p <password>```
 2. Pull the latest jfrog-demo image.<br />
@@ -86,4 +86,35 @@ The above diagram represents the environment used to create the demo deliverable
    ```
 4. Browse to http://localhost:8080 on the workstation browser to access the Spring PetClinic Application.
    > **NOTE**: Incase some other container is using port 8080 (for example, the Jenkins container is exposed over port 8080 in our demo environment), expose the container's port 8080 over some other host port that is not being currently utilized.<br />
-   ```docker run -d --rm -p 8050:8080 arceus805/jfrog-demo:latest```
+   ```docker run -d --rm -p 8050:8080 arceus805/jfrog-demo:latest``` 
+
+#### IIIB - Run the application using the Docker Image from Artifactory
+If you followed the steps under [**getting-started.md**](./resources/docs/getting-started.md) to setup your local Artifactory Server, then perform the steps below to connect to the **Docker Repository** hosted on your local Artifactory Server.
+###### Setup local workstation to connect to Artifactory Server hosting Docker Repository
+1. Get the Artifactory Server docker container's **IP address**.<br />
+   ```docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' artifactory```
+2. Edit the **daemon.json** file, stored under **/etc/docker/daemon.json**. If the file does not exist, then create it.<br />
+   ```
+   {
+     "insecure-registry": ["<container_ip>:8082"]
+   }
+   ```
+3. Restart the docker engine.
+> **NOTE**: Follow [this link](https://www.jfrog.com/confluence/display/JFROG/Getting+Started+with+Artifactory+as+a+Docker+Registry#GettingStartedwithArtifactoryasaDockerRegistry-GettingStartedwithArtifactoryProOn-Prem) to setup connection to the local artifactory server hosting the docker registry using **Reverse Proxy Method (Sub Domain or Port)**. We are going to be using the **Repository Path Method**.
+
+###### Run the application using the Docker Image from Artifactory
+1. Login to artifactory from the cli.<br />
+   ```docker login -u <username> -p <password> <container_ip>:8082```
+2. Pull the latest jfrog-demo image.<br />
+   ```docker pull <container_ip>:8082/jfrog-demo-docker-local/jfrog-demo:latest```
+3. Run the docker image.
+   ```
+   docker run \
+   -d \
+   --rm \
+   -p 8080:8080 \
+   <container_ip>:8082/jfrog-demo-docker-local/jfrog-demo:latest
+   ```
+4. Browse to http://localhost:8080 on the workstation browser to access the Spring PetClinic Application.
+   > **NOTE**: Incase some other container is using port 8080 (for example, the Jenkins container is exposed over port 8080 in our demo environment), expose the container's port 8080 over some other host port that is not being currently utilized.<br />
+   ```docker run -d --rm -p 8050:8080 <container_ip>:8082/jfrog-demo-docker-local/jfrog-demo:latest```
