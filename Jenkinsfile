@@ -5,6 +5,7 @@ pipeline {
     }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-jfrog-demo')
+        ARTIFACTORY_CREDENTIALS = credentials('artifactory-jfrog-demo')
     }
     stages {	
         stage ('Artifactory configuration') {
@@ -12,7 +13,7 @@ pipeline {
 //                rtServer (
 //                   id: "ARTIFACTORY_SERVER",
 //                   url: "http://artifactory:8082/artifactory",
-//		     credentialsId: 'b7a1a8e8-1341-4366-989c-7e5f29a8fc82'
+//		     credentialsId: 'artifactory-jfrog-demo'
 //                )
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
@@ -50,13 +51,21 @@ pipeline {
             steps {
                 sh "docker build -t $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER ."
                 sh "docker tag $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:latest"
+                sh "docker tag $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER artifactory:8082/jfrog-demo-docker-local/jfrog-demo:$BUILD_NUMBER"
             }
         }
-        stage ('Push Dockerfile to Dockerhub') {
+        stage ('Push Docker Image to DockerHub') {
             steps {
                 sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
                 sh "docker push $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER"
                 sh "docker push $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:latest"
+                sh "docker logout"
+            }
+        }
+        stage ('Push Docker Image to Artifactory') {
+            steps {
+                sh "echo $ARTIFACTORY_CREDENTIALS_PSW | docker login -u $ARTIFACTORY_CREDENTIALS_USR --password-stdin artifactory:8082"
+                sh "docker push artifactory:8082/jfrog-demo-docker-local/jfrog-demo:$BUILD_NUMBER"
             }
         }
     }
