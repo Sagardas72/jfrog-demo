@@ -106,15 +106,15 @@ If you followed the steps under [**getting-started.md**](./resources/docs/gettin
 1. Login to artifactory from the cli.<br />
    ```docker login -u <username> -p <password> <container_ip>:8082```
 2. Pull the latest jfrog-demo image.<br />
-   ```docker pull <container_ip>:8082/jfrog-demo-docker-local/jfrog-demo:latest```
+   ```docker pull <container_ip>:8082/<repository_prefix>-docker-local/jfrog-demo:latest```
 3. Run the docker image.
    ```
    docker run \
    -d \
    --rm \
    -p 8080:8080 \
-   <container_ip>:8082/jfrog-demo-docker-local/jfrog-demo:latest
+   <container_ip>:8082/<repository_prefix>-docker-local/jfrog-demo:latest
    ```
 4. Browse to http://localhost:8080 on the workstation browser to access the Spring PetClinic Application.
    > **NOTE**: Incase some other container is using port 8080 (for example, the Jenkins container is exposed over port 8080 in our demo environment), expose the container's port 8080 over some other host port that is not being currently utilized.<br />
-   ```docker run -d --rm -p 8050:8080 <container_ip>:8082/jfrog-demo-docker-local/jfrog-demo:latest```
+   ```docker run -d --rm -p 8050:8080 <container_ip>:8082/<repository_prefix>-docker-local/jfrog-demo:latest```
