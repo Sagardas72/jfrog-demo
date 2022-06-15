@@ -18,14 +18,14 @@ pipeline {
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "jfrog-artifactory",
-                    releaseRepo: "test-libs-release-local",
-                    snapshotRepo: "test-libs-snapshot-local"
+                    releaseRepo: "jfrog-demo-libs-release-local",
+                    snapshotRepo: "jfrog-demo-libs-snapshot-local"
                 )
                 rtMavenResolver (
                     id: "MAVEN_RESOLVER",
                     serverId: "jfrog-artifactory",
-                    releaseRepo: "test-libs-release",
-                    snapshotRepo: "test-libs-snapshot"
+                    releaseRepo: "jfrog-demo-libs-release",
+                    snapshotRepo: "jfrog-demo-libs-snapshot"
                 )
             }
         }
@@ -52,6 +52,7 @@ pipeline {
                 sh "docker build -t $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER ."
                 sh "docker tag $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:latest"
                 sh "docker tag $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER artifactory:8082/jfrog-demo-docker-local/jfrog-demo:$BUILD_NUMBER"
+                sh "docker tag $DOCKERHUB_CREDENTIALS_USR/jfrog-demo:$BUILD_NUMBER artifactory:8082/jfrog-demo-docker-local/jfrog-demo:latest"
             }
         }
         stage ('Push Docker Image to DockerHub') {
@@ -66,6 +67,7 @@ pipeline {
             steps {
                 sh "echo $ARTIFACTORY_CREDENTIALS_PSW | docker login -u $ARTIFACTORY_CREDENTIALS_USR --password-stdin artifactory:8082"
                 sh "docker push artifactory:8082/jfrog-demo-docker-local/jfrog-demo:$BUILD_NUMBER"
+                sh "docker push artifactory:8082/jfrog-demo-docker-local/jfrog-demo:latest"
             }
         }
     }
